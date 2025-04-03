@@ -1,11 +1,21 @@
-/* 
+.fondo{
+    height: 100vh;
+    background-color: rgb(192, 188, 182);
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.icono {
+    display: none;
+  }
+  
+  .contenedor:hover .icono {
+    display: inline-block; 
+  }
+  
 
-*/
+  .texto-wrap {
+    max-width: 250px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+  
