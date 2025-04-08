@@ -30,7 +30,7 @@ const Layout = () => {
     const postData = async (tarea) => {
 
         try {
-            let response = await fetch("https://playground.4geeks.com/todo/todos/J.Araya"
+            let response = await fetch("https://playground.4geeks.com/todo/todos/JoseF"
                 ,
                 {
                     method: "POST",
@@ -73,17 +73,17 @@ const Layout = () => {
         }
     }
 
-    const handlerClickEliminarBoton = () =>{
+    const handlerClickEliminarBoton = () => {
         deleteTodasLasPreguntas(data.name)
     }
 
-    const deleteTodasLasPreguntas = async(nombreUsuario)=>{
+    const deleteTodasLasPreguntas = async (nombreUsuario) => {
         try {
             let response = await fetch(`https://playground.4geeks.com/todo/users/${nombreUsuario}`,
                 {
                     method: "DELETE"
                 })
-            if(!response.ok){
+            if (!response.ok) {
                 throw new Error("Algo salio mal al eliminar el usuario")
             }
             let response2 = await fetch(`https://playground.4geeks.com/todo/users/${nombreUsuario}`,
@@ -104,9 +104,22 @@ const Layout = () => {
         }
     }
 
+
     const getData = async () => {
         try {
-            let response = await fetch("https://playground.4geeks.com/todo/users/J.Araya")
+            let response = await fetch("https://playground.4geeks.com/todo/users/JoseF")
+
+            if (response.status === 404) {
+                const crearUsuario = await fetch("https://playground.4geeks.com/todo/users/JoseF", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+
+                    body: JSON.stringify([]),
+                });
+            }
+            response = await fetch("https://playground.4geeks.com/todo/users/JoseF")
             if (!response.ok) {
                 throw new Error("Algo salio mal")
             }
@@ -120,11 +133,10 @@ const Layout = () => {
 
     useEffect(() => {
         getData()
-
     }, [])
 
     return (
-        
+
         <div className="d-flex flex-column justify-content-center align-items-center fondo">
             <h1><strong>ToDo List</strong></h1>
             <div className=" d-flex flex-column gap-1">
@@ -143,7 +155,7 @@ const Layout = () => {
                     <p> Quedan {listaDeTareas.length} tareas</p>
                 </div>
             </div>
-            <Boton mensaje={"Eliminar todas las tareas"} onClick={handlerClickEliminarBoton}/>
+            <Boton mensaje={"Eliminar todas las tareas"} onClick={handlerClickEliminarBoton} />
         </div>
     )
 }
